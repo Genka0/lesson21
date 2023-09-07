@@ -1,7 +1,8 @@
 from aiogram import Bot, Dispatcher, types, executor
-from decouple import Config, Csv
+from decouple import config
 
-config = Config()
+
+config = config()
 config.read(".env")
 
 bot = Bot(config("API_TOKEN"))
