@@ -2,7 +2,7 @@ from aiogram import Bot, Dispatcher, types, executor
 import random
 
 # Вставьте свой токен бота здесь
-API_TOKEN = 'YOUR_API_TOKEN'
+API_TOKEN = '6333977701:AAHiCobZTPKoqZ7XzfuZTFdPhFMFYUXxvyY'
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
@@ -25,20 +25,22 @@ async def command_help(message: types.Message):
 async def answer_question(message: types.Message):
     text = message.text.lower()
 
-    if "привет" in text:
+    if "привіт" in text:
         response = get_random_response('pryvit.txt')
-    elif "как дела" in text:
+    elif "як справи" in text:
         response = get_random_response('jak_sprawy.txt')
     # elif "какая погода" in text:
     #     response = get_random_response('kakaya_pogoda.txt')
-    # elif "как тебя зовут" in text:
-    #     response = get_random_response('kak_tebya_zovut.txt')
+    elif "як тебе звати?" in text:
+        response = get_random_response('jak_tebe_zwaty.txt')
     # elif "сколько тебе дней" in text:
     #     response = get_random_response('skolko_tebya_dney.txt')
     # elif "который час" in text:
     #     response = get_random_response('kotoriy_chas.txt')
+    elif "слава україні" in text:
+        response = ('slava_ukraini')
     else:
-        response = "Вибач, не розумію питанняя(."
+        response = "Вибач, не розумію питання(."
 
     await message.answer(response)
 
