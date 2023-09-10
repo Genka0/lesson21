@@ -1,11 +1,14 @@
 from aiogram import Bot, Dispatcher, types, executor
 import random
+import datetime
+
 
 # Вставьте свой токен бота здесь
 API_TOKEN = '6333977701:AAHiCobZTPKoqZ7XzfuZTFdPhFMFYUXxvyY'
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
+
 
 # Функция для получения случайного ответа из файла
 def get_random_response(file_path):
@@ -38,11 +41,17 @@ async def answer_question(message: types.Message):
     # elif "который час" in text:
     #     response = get_random_response('kotoriy_chas.txt')
     elif "слава україні" in text:
-        response = ('slava_ukraini')
+        response = ('slava_ukraini.txt')
+    elif "котра година" in text:  # Добавляем обработку вопроса "который час?"
+        message_date = message.date
+        response("Дата сообщения в формате Unix timestamp:", message_date)
+        # current_time = get_current_time()
+        # response = f"Поточний час: {current_time}"
     else:
         response = "Вибач, не розумію питання(."
 
     await message.answer(response)
+
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
