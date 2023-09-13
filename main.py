@@ -3,11 +3,11 @@ import random
 import datetime
 
 
-# Вставьте свой токен бота здесь
 API_TOKEN = '6333977701:AAHiCobZTPKoqZ7XzfuZTFdPhFMFYUXxvyY'
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
+date_of_creation = 1694545200 #12.09.2023 у unix
 
 
 # Функция для получения случайного ответа из файла
@@ -24,6 +24,11 @@ async def send_welcome(message: types.Message):
 async def command_help(message: types.Message):
     await message.answer("Напиши мені якийсь типовий запит, і я дам тобі відповідь!")
 
+# @dp.message_handler()
+# async def echo(message: types.Message):
+#     print(message)
+
+
 @dp.message_handler()
 async def answer_question(message: types.Message):
     text = message.text.lower()
@@ -32,19 +37,25 @@ async def answer_question(message: types.Message):
         response = get_random_response('pryvit.txt')
     elif "як справи" in text:
         response = get_random_response('jak_sprawy.txt')
-    # elif "какая погода" in text:
-    #     response = get_random_response('kakaya_pogoda.txt')
+    # elif "яка погода?" in text:
+    #     response = get_random_response('jaka_pogoda'.txt')
     elif "як тебе звати?" in text:
         response = get_random_response('jak_tebe_zwaty.txt')
-    # elif "сколько тебе дней" in text:
-    #     response = get_random_response('skolko_tebya_dney.txt')
-    # elif "который час" in text:
-    #     response = get_random_response('kotoriy_chas.txt')
+    elif "скільки тобі днів" in text:
+        message_date = message.date #беремо інформацію про дату отримання повідомлення
+        bot_creation_date = datetime.datetime.fromtimestamp(date_of_creation)#перетворюємо мітку date_of_creation у об'єкт bot_creation_date
+        time_difference = message_date - bot_creation_date#щоб отримати час існування бота віднімаю від дати написання повідомлення користувачем
+        #дату створення бота
+        days_difference = time_difference.days#отримуємо кількість днів у цій даті за допомогою .days
+        response = f"Я існую вже {days_difference} днів."#виводимо
     elif "слава україні" in text:
         response = ('slava_ukraini.txt')
-    elif "котра година" in text:  # Добавляем обработку вопроса "который час?"
+    elif "котра година" in text:
         message_date = message.date
-        response("Дата сообщения в формате Unix timestamp:", message_date)
+        # Перетворимо об'єкт datetime.datetime у строку з форматом, який ділить цю дату на рік-місяць-день і т.д
+        formatted_date = message_date.strftime("%Y-%m-%d %H:%M:%S")#якщо цією строкою не вказати формат в якому я 
+        #хочу бачити дату, то вийде наступне"(2023, 9, 10, 20, 45, 26))". дуже зрозуміло
+        response = "Час відправки вашого повідомлення у системі Unix timestamp з урахуванням розташування серверу (Польща): " + formatted_date
         # current_time = get_current_time()
         # response = f"Поточний час: {current_time}"
     else:
