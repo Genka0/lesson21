@@ -22,7 +22,7 @@ async def send_welcome(message: types.Message):
 
 @dp.message_handler(commands=["help"])
 async def command_help(message: types.Message):
-    await message.answer("Напиши мені якийсь типовий запит, і я дам тобі відповідь!")
+    await message.answer("Ось що ти можешь мені написати: 'Привіт!', 'Як справи?', 'Яка погода?', 'Як тебе звати?', 'Котра година?', 'Скільки тобі днів?' та 'Слава Україні!'")
 
 # @dp.message_handler()
 # async def echo(message: types.Message):
