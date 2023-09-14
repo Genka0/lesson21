@@ -7,7 +7,7 @@ API_TOKEN = '6333977701:AAHiCobZTPKoqZ7XzfuZTFdPhFMFYUXxvyY'
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
-date_of_creation = 1694545200 #12.09.2023 у unix
+date_of_creation = 1694457657 #12.09.2023 у unix
 
 
 # Функция для получения случайного ответа из файла
@@ -34,20 +34,15 @@ async def answer_question(message: types.Message):
     text = message.text.lower()
 
     if "привіт" in text:
-        response = get_random_response('pryvit.txt')
+        response = get_random_response('hello.txt')
     elif "як справи" in text:
-        response = get_random_response('jak_sprawy.txt')
-    # elif "яка погода?" in text:
-    #     response = get_random_response('jaka_pogoda'.txt')
+        response = get_random_response('whatsup.txt')
+    elif "яка погода?" in text:
+        response = get_random_response('about_wether.txt')
     elif "як тебе звати?" in text:
-        response = get_random_response('jak_tebe_zwaty.txt')
+        response = get_random_response('whats_your_name.txt')
     elif "скільки тобі днів" in text:
-        message_date = message.date #беремо інформацію про дату отримання повідомлення
-        bot_creation_date = datetime.datetime.fromtimestamp(date_of_creation)#перетворюємо мітку date_of_creation у об'єкт bot_creation_date
-        time_difference = message_date - bot_creation_date#щоб отримати час існування бота віднімаю від дати написання повідомлення користувачем
-        #дату створення бота
-        days_difference = time_difference.days#отримуємо кількість днів у цій даті за допомогою .days
-        response = f"Я існую вже {days_difference} днів."#виводимо
+        response = get_random_response('how_old_r_u.txt')
     elif "слава україні" in text:
         response = ('slava_ukraini.txt')
     elif "котра година" in text:
