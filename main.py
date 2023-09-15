@@ -7,10 +7,8 @@ API_TOKEN = '6333977701:AAHiCobZTPKoqZ7XzfuZTFdPhFMFYUXxvyY'
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
-date_of_creation = 1694457657 #12.09.2023 у unix
+# date_of_creation = 1694457657 #12.09.2023 у unix
 
-
-# Функция для получения случайного ответа из файла
 def get_random_response(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         responses = file.read().splitlines()
